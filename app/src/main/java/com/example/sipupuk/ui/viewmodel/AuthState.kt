@@ -1,26 +1,5 @@
 package com.example.sipupuk.ui.viewmodel
 
-// Login UI State
-data class LoginUiState(
-    val password: String = "",
-    val isLoading: Boolean = false,
-    val errorMessage: String? = null,
-    val isPasswordVisible: Boolean = false
-)
-
-// Register UI State
-data class RegisterUiState(
-    val name: String = "",
-    val phone: String = "",
-    val password: String = "",
-    val passwordConfirmation: String = "",
-    val role: String = "pembeli",
-    val isLoading: Boolean = false,
-    val errorMessage: String? = null,
-    val isPasswordVisible: Boolean = false,
-    val isPasswordConfirmationVisible: Boolean = false
-)
-
 // Form Validation
 object ValidationHelper {
 

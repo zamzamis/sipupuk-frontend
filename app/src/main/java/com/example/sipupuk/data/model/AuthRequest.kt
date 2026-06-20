@@ -28,3 +28,19 @@ data class RegisterRequest(
     @SerializedName("role")
     val role: String = "pembeli"
 )
+
+data class CheckPhoneRequest(
+    @SerializedName("phone")
+    val phone: String
+)
+
+data class ResetPasswordRequest(
+    @SerializedName("phone")
+    val phone: String,
+
+    @SerializedName("password")
+    val password: String,
+
+    @SerializedName("password_confirmation")
+    val passwordConfirmation: String
+)

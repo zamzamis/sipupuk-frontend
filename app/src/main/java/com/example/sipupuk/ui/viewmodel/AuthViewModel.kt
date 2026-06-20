@@ -24,6 +24,14 @@ class AuthViewModel(context: Context) : ViewModel() {
     private val _registerState = MutableStateFlow<Resource<AuthData>?>(null)
     val registerState: StateFlow<Resource<AuthData>?> = _registerState.asStateFlow()
 
+    // Check Phone State (untuk forgot password step 1)
+    private val _checkPhoneState = MutableStateFlow<Resource<String>?>(null)
+    val checkPhoneState: StateFlow<Resource<String>?> = _checkPhoneState.asStateFlow()
+
+    // Reset Password State (untuk forgot password step 2)
+    private val _resetPasswordState = MutableStateFlow<Resource<String>?>(null)
+    val resetPasswordState: StateFlow<Resource<String>?> = _resetPasswordState.asStateFlow()
+
     // Logout State
     private val _logoutState = MutableStateFlow<Resource<Unit>?>(null)
     val logoutState: StateFlow<Resource<Unit>?> = _logoutState.asStateFlow()
@@ -83,6 +91,34 @@ class AuthViewModel(context: Context) : ViewModel() {
                 }
             }
         }
+    }
+
+    // Check Phone Function (forgot password step 1)
+    fun checkPhone(phone: String) {
+        viewModelScope.launch {
+            repository.checkPhone(phone).collect { result ->
+                _checkPhoneState.value = result
+            }
+        }
+    }
+
+    // Reset Password Function (forgot password step 2)
+    fun resetPassword(phone: String, password: String, passwordConfirmation: String) {
+        viewModelScope.launch {
+            repository.resetPassword(phone, password, passwordConfirmation).collect { result ->
+                _resetPasswordState.value = result
+            }
+        }
+    }
+
+    // Reset Check Phone State
+    fun resetCheckPhoneState() {
+        _checkPhoneState.value = null
+    }
+
+    // Reset Reset Password State
+    fun resetResetPasswordState() {
+        _resetPasswordState.value = null
     }
 
     // Logout Function

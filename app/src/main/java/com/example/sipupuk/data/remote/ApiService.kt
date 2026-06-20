@@ -29,6 +29,16 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<ApiResponse<UserKata>>
 
+    @POST("forgot-password/check-phone")
+    suspend fun checkPhone(
+        @Body request: CheckPhoneRequest
+    ): Response<ApiResponse<Unit>>
+
+    @POST("forgot-password/reset")
+    suspend fun resetPassword(
+        @Body request: ResetPasswordRequest
+    ): Response<ApiResponse<Unit>>
+
 
     // ========== TOKO - PENJUAL ==========
 

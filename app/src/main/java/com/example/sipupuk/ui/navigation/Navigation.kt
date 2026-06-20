@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import com.example.sipupuk.data.model.LaporanBulanan
 import com.example.sipupuk.ui.screen.LoginScreen
 import com.example.sipupuk.ui.screen.RegisterScreen
+import com.example.sipupuk.ui.screen.ForgotPasswordScreen
 import com.example.sipupuk.ui.screen.pembeli.*
 import com.example.sipupuk.ui.screen.penjual.LaporanPenjualanScreen
 import com.example.sipupuk.ui.screen.penjual.PenjualHomeScreen
@@ -27,6 +28,8 @@ import com.example.sipupuk.ui.viewmodel.AuthViewModelFactory
 sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Register : Screen("register")
+
+    object ForgotPassword : Screen("forgot_password")
 
     // Pembeli Routes
     object PembeliHome : Screen("pembeli_home")
@@ -100,6 +103,9 @@ fun AppNavigation() {
                 },
                 onNavigateToRegister = {
                     navController.navigate(Screen.Register.route)
+                },
+                onNavigateToForgotPassword = {
+                    navController.navigate(Screen.ForgotPassword.route)
                 }
             )
         }
@@ -121,6 +127,18 @@ fun AppNavigation() {
                     }
                 },
                 onNavigateToLogin = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screen.ForgotPassword.route) {
+            ForgotPasswordScreen(
+                onResetSuccess = {
+                    // Kembali ke halaman login setelah password berhasil diubah
+                    navController.popBackStack()
+                },
+                onNavigateBack = {
                     navController.popBackStack()
                 }
             )

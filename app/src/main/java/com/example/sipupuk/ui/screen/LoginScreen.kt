@@ -36,7 +36,8 @@ import com.example.sipupuk.util.Resource
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
-    onNavigateToRegister: () -> Unit
+    onNavigateToRegister: () -> Unit,
+    onNavigateToForgotPassword: () -> Unit
 ) {
     val context = LocalContext.current
     val viewModel: AuthViewModel = viewModel(
@@ -224,7 +225,17 @@ fun LoginScreen(
                 enabled = !isLoading
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+// Lupa Password Link
+            TextButton(
+                onClick = onNavigateToForgotPassword,
+                modifier = Modifier.align(Alignment.End),
+                enabled = !isLoading
+            ) {
+                Text(
+                    text = "Lupa Password ?",
+                    fontSize = 13.sp
+                )
+            }
 
             // Login Button
             Button(
